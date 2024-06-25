@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import {UserRouter} from "../Routes/User.routes.js"
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(express.json()); //middleware to convert incoming data from frontend to json
@@ -12,7 +14,7 @@ app.use(cors()); //enabling communication bw frontend and backend
 app.listen(3001, async (req, res) => {
   try {
     await mongoose.connect(
-      "mongodb+srv://nipunkup:nipun2002@recipes.rlyz6k4.mongodb.net/?retryWrites=true&w=majority&appName=Recipes"
+      process.env.MONGODB_URI
     );
     console.log("Successfully Connected to mongodb!!!!");
   } catch (e) {
