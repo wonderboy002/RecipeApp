@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import {UserRouter} from "../Routes/User.routes.js"
+import { recipeRouter } from "../Routes/Recipe.routes.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -23,8 +24,8 @@ app.listen(3001, async (req, res) => {
   console.log("Server stared");
 });
 
-app.use("/auth",UserRouter);
-
+app.use("/auth",UserRouter);//all requests at url /auth will be handled by userrouter
+app.use("/recipe",recipeRouter);//all requests at url /recipe will be handled by recipe router
 app.get("/",(req,res)=>{
   res.send("Hello There");
 })
