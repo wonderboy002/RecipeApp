@@ -8,6 +8,10 @@ import Layout from './Pages/Layout.jsx';
 import Hero from './Components/Hero.jsx';
 import RegisterPage from './Pages/RegisterPage.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
+import AddRecipePage from './Pages/AddRecipePage.jsx';
+import AllRecipes from './Pages/AllRecipes.jsx';
+import RecipeCard from './Components/RecipeCard.jsx';
+import SavedRecipes from "./Pages/SavedRecipes.jsx";
 const router=createBrowserRouter([
   {
     path : "/",
@@ -27,11 +31,19 @@ const router=createBrowserRouter([
         },
         {
           path : "AddRecipe",
-          element : <h1>Add Recipe Page</h1>
+          element : <AddRecipePage/>
+        },
+        {
+          path : "AllRecipes",
+          element : <AllRecipes/>
         },
         {
           path : "SavedRecipe",
-          element : <h1>All Saved Recipe's Here</h1>
+          element : <SavedRecipes/>
+        },
+        {
+          path : "cardDemo",
+          element : <RecipeCard/>
         }
     ]
   }

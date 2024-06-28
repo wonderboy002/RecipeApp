@@ -32,7 +32,8 @@ router.put("/", async (req, res) => {
     const recipe = await Recipe.findById(req.body.recipeId);
     //find user who wants to save
     const user = await User.findById(req.body.userId);
-    user.savedRecipes.push(recipe);//adding saved recipe to user model
+    
+    user?.savedRecipes?.push(recipe);//adding saved recipe to user model
     await user.save();
     res.json({ savedRecipes: user.savedRecipes });
   } catch (e) {
@@ -40,12 +41,24 @@ router.put("/", async (req, res) => {
   }
 });
 
+router.delete("/:id",async (req,res)=>{
+  try {
+     const recipeId=req.params.id;
+     const response=await Recipe.findByIdAndDelete(recipeId);
+     res.json(response);  
+  }
+  catch (e){
+    console.log("Error while deleting recipe!!!",e);
+  }
+})
+
 
 //get saved Recipes
-router.get("/saved",async (req,res)=>{
+router.get("/saved/:id",async (req,res)=>{
     try {
        //find the user
-       const user=await User.findById(req.body.userId);
+    
+       const user=await User.findById(req.params.id);
        //get the saved recipes
        const savedRecipes=await Recipe.find({
         _id : user.savedRecipes

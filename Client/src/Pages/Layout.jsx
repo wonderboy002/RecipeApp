@@ -6,7 +6,7 @@ import "../index.css";
 
 function Layout() {
   return (
-    <div className="LandingPage flex flex-col gap-4 p-8 w-full bg-[#16a085] h-screen">
+    <div className="LandingPage flex flex-col gap-4 p-8 w-full min-h-screen bg-[#16a085]">
     <Navbar />
     <Outlet/>
   

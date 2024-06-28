@@ -18,8 +18,8 @@ function RegisterPage() {
     }
   }
   return (
-    <div className="w-2/3 mt-16 overflow-hidden rounded-2xl mx-auto flex h-3/5 bg-white">
-      <div className="left w-1/2 h-full gap-6 items-center flex flex-col p-8 bg-slate-300">
+    <div className="w-2/3 mt-16 overflow-hidden rounded-2xl mx-auto flex bg-white">
+      <div className="left w-1/2 justify-center  gap-6 items-center flex flex-col p-8 bg-slate-300">
         <h1 className="font-semibold text-xl font-serif text-teal-600">
           Create Your Account
         </h1>
@@ -55,7 +55,7 @@ function RegisterPage() {
       <div className="right w-1/2 h-full bg-black">
         <img
           src="https://plus.unsplash.com/premium_photo-1663858367001-89e5c92d1e0e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHx8MA%3D%3D"
-          className="w-full h-full"
+          className="h-1/2"
         />
       </div>
     </div>

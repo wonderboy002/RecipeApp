@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useCookies } from "react-Cookie";
+import { useCookies } from "react-cookie";
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ function LoginPage() {
   }
   return (
     <div className="w-2/3 mt-16 overflow-hidden rounded-2xl mx-auto flex h-3/5 bg-white">
-      <div className="left w-1/2 h-full gap-8 items-center flex flex-col p-8 bg-slate-300">
+      <div className="left w-1/2 gap-8 justify-center items-center flex flex-col p-8 bg-slate-300">
         <h1 className="font-semibold text-xl font-serif text-teal-600">
           Login With Your Account
         </h1>

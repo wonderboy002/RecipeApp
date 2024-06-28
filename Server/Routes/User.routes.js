@@ -49,4 +49,16 @@ router.post("/login", async (req, res) => {
 
 //login functionality nearly done
 
+//get User information
+router.get("/:userId",async (req,res)=>{
+    console.log(userId);
+    try {
+        const user=await User.findById(req.body.userId);
+        res.json(user);
+    }
+    catch (e){
+        console.log("error while fethcing user information!!!",e);
+    }
+})
+
 export { router as UserRouter };
