@@ -11,7 +11,17 @@ function SavedRecipeCard({
   recipeId
 }) {
   
-
+  async function deleteSavedRecipe(){
+ 
+       try {
+          const response=await axios.delete(`http://localhost:3001/recipe/saved/${userId}/${recipeId}`);
+          alert("recipe deleted Successfully!!!");
+          Navigate("/");
+       }
+       catch (e){
+        console.log("Error while deleting saved recipes",e);
+       }
+  }
   return (
     <div>
       <div className="card overflow-hidden rounded-xl flex flex-col gap-2 bg-slate-300 h-[350px] w-[270px]">
@@ -30,8 +40,15 @@ function SavedRecipeCard({
             </ul>
           </div>
           <p className="font-semibold">{instructions}</p>
+        {
+          userId===localStorage.getItem("userId") ? (
+            <button className="bg-red-600 w-2/3 font-semibold font-serif text-white p-2 rounded-lg hover:bg-red-400" onClick={deleteSavedRecipe}>Delete</button>
+          ):
+          (
+             <h1></h1>
+          )
+        }
         </div>
-        
       </div>
     </div>
   );

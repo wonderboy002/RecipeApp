@@ -32,8 +32,8 @@ router.put("/", async (req, res) => {
     const recipe = await Recipe.findById(req.body.recipeId);
     //find user who wants to save
     const user = await User.findById(req.body.userId);
-    
-    user?.savedRecipes?.push(recipe);//adding saved recipe to user model
+
+    user?.savedRecipes?.push(recipe); //adding saved recipe to user model
     await user.save();
     res.json({ savedRecipes: user.savedRecipes });
   } catch (e) {
@@ -41,32 +41,56 @@ router.put("/", async (req, res) => {
   }
 });
 
-router.delete("/:id",async (req,res)=>{
+router.delete("/:id", async (req, res) => {
   try {
-     const recipeId=req.params.id;
-     const response=await Recipe.findByIdAndDelete(recipeId);
-     res.json(response);  
+    const recipeId = req.params.id;
+    const response = await Recipe.findByIdAndDelete(recipeId);
+    res.json(response);
+  } catch (e) {
+    console.log("Error while deleting recipe!!!", e);
   }
-  catch (e){
-    console.log("Error while deleting recipe!!!",e);
-  }
-})
-
+});
 
 //get saved Recipes
-router.get("/saved/:id",async (req,res)=>{
-    try {
-       //find the user
-    
-       const user=await User.findById(req.params.id);
-       //get the saved recipes
-       const savedRecipes=await Recipe.find({
-        _id : user.savedRecipes
-       });
-       res.json({savedRecipes}); 
-    }
-    catch (e){
-        console.log("Error while getting saved Recipes!!",e);
-    }
+router.get("/saved/:id", async (req, res) => {
+  try {
+    //find the user
+
+    const user = await User.findById(req.params.id);
+    //get the saved recipes
+    const savedRecipes = await Recipe.find({
+      _id: user.savedRecipes,
+    });
+    res.json({ savedRecipes });
+  } catch (e) {
+    console.log("Error while getting saved Recipes!!", e);
+  }
+});
+
+//delete saved recipes
+router.delete("/saved/:userId/:recipeId", async (req, res) => {
+  try {
+    //find the user with userId
+    const user = await User.findById(req.params.userId);
+    //find the recipe
+    const recipe = await Recipe.findById(req.params.recipeId);
+    console.log(user, recipe);
+    //filter this recipe from saved recipe
+
+    const filteredSavedRecipes = user.savedRecipes.filter(
+      (saved_recipe, idx) => {
+        return saved_recipe === req.params.recipeId;
+      }
+    );
+
+   
+    //update the user with new saved recipes list
+    user.savedRecipes = filteredSavedRecipes;
+    user.save();
+
+    res.json({ savedRecipes: user.savedRecipes });
+  } catch (e) {
+    console.log("Error while trying to delete saved recipe!!!", e);
+  }
 });
 export { router as recipeRouter };

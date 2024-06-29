@@ -9,30 +9,31 @@ function RecipeCard({
   cookingTime,
   Ingredients,
   userId,
-  recipeId
+  recipeId,
+  flag,
+  setFlag,
 }) {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate();
-  
-  async function saveRecipe(){
-     try {
-       const response=await axios.put("http://localhost:3001/recipe",{
-        recipeId,userId : localStorage.getItem("userId")
-       });
-      
-     }
-     catch (e){
-        console.log("Error while trying to save recipe for a user!!!",e);
-     }
+  async function saveRecipe() {
+    try {
+      const response = await axios.put("http://localhost:3001/recipe", {
+        recipeId,
+        userId: localStorage.getItem("userId"),
+      });
+    } catch (e) {
+      console.log("Error while trying to save recipe for a user!!!", e);
+    }
   }
 
-  async function deleteRecipe(){
+  async function deleteRecipe() {
     try {
-        const response=await axios.delete(`http://localhost:3001/recipe/${recipeId}`);
-        navigate("/SavedRecipe")
-    }
-    catch (e){
-        console.log("Error while deleting recipe!!!",e);
+      const response = await axios.delete(
+        `http://localhost:3001/recipe/${recipeId}`
+      );
+      navigate("/");
+    } catch (e) {
+      console.log("Error while deleting recipe!!!", e);
     }
   }
   return (
@@ -56,13 +57,19 @@ function RecipeCard({
         </div>
         <div className="footer flex gap-4 p-4">
           <button
-           onClick={saveRecipe}
-           className="bg-green-600 font-semibold font-serif text-white p-2 rounded-lg hover:bg-green-700 ">
+            onClick={saveRecipe}
+            className="bg-green-600 font-semibold font-serif text-white p-2 rounded-lg hover:bg-green-700 "
+          >
             Save
           </button>
-         {
-          localStorage.getItem("userId")===userId ?  <button className="bg-red-600 font-semibold font-serif text-white p-2 rounded-lg hover:bg-red-400" onClick={deleteRecipe}>Delete</button> : null
-         }
+          {localStorage.getItem("userId") === userId ? (
+            <button
+              className="bg-red-600 font-semibold font-serif text-white p-2 rounded-lg hover:bg-red-400"
+              onClick={deleteRecipe}
+            >
+              Delete
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

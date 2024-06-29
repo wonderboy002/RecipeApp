@@ -5,12 +5,12 @@ import RecipeCard from "../Components/RecipeCard";
 function AllRecipes() {
   const [recipes, setRecipes] = useState([]);
   const [token,setCookies]=useCookies(["access-token"]);
+  const [flag,setFlag]=useState(false);
   useEffect(() => {
     try {
       const resData = axios
         .get("http://localhost:3001/recipe")
         .then((res) => {
-          console.log(res);
           setRecipes(res.data);
         })
         .catch((e) => {
@@ -21,9 +21,7 @@ function AllRecipes() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(recipes);
-  }, [recipes]);
+  
   return <div>
        {
         token["access-token"] ? (
@@ -38,7 +36,10 @@ function AllRecipes() {
                      Ingredients={ele.Ingredients}
                      userId={ele.author}
                      recipeId={ele._id}
-                     key={idx}/>
+                     key={idx}
+                     flag={flag}
+                     setFlag={setFlag}
+                    />
                     )
                 }
             </div>
