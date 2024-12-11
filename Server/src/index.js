@@ -12,13 +12,14 @@ app.use(cors()); //enabling communication bw frontend and backend
 
 
 //connecting to mongodb
-app.listen(3001, async (req, res) => {
+app.listen(process.env.PORT, async (req, res) => {
   try {
     await mongoose.connect(
       process.env.MONGODB_URI
     );
     console.log("Successfully Connected to mongodb!!!!");
   } catch (e) {
+    console.log(process.env.MONGODB_URI)
     console.log("Error While Connecting to mongodb!!!", e);
   }
   console.log("Server stared");

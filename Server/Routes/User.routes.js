@@ -51,14 +51,13 @@ router.post("/login", async (req, res) => {
 
 //get User information
 router.get("/:userId",async (req,res)=>{
-    console.log(userId);
     try {
-        const user=await User.findById(req.body.userId);
+        const user=await User.findById(req.params.userId);
         res.json(user);
     }
     catch (e){
         console.log("error while fethcing user information!!!",e);
     }
-})
+});
 
 export { router as UserRouter };
